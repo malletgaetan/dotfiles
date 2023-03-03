@@ -1,10 +1,3 @@
-require('basics')
-require('treesitterconf')
-require('telescopeconf')
-require('github-theme').setup({
-  theme_style = "dark",
-})
-
 require('packer').startup(function(use)
   -- dope sht
   use 'wbthomason/packer.nvim'
@@ -19,6 +12,12 @@ require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   -- theme
-  use ({ 'projekt0n/github-nvim-theme', tag = 'v0.0.7' })
+  use 'Mofiqul/dracula.nvim'
 end)
 
+require('basics')
+require('treesitterconf')
+require('telescopeconf')
+require('dracula')
+
+vim.cmd[[colorscheme dracula]]
