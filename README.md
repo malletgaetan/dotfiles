@@ -28,3 +28,9 @@
 | di( | delete inside '(' ')' |
 | da( | delete around '(' ')' |
 | :%s/a/b/g | regex like, replace all occurences of 'a' to 'b' |
+
+## Gnome setting
+```bash
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+```
