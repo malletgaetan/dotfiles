@@ -1,8 +1,19 @@
-# Config
+# minimal config
 
-## Nvim cheat sheet
+## non-default dependencies
 
-| combo | utility |
+| name | install |
+| ---- | ------- |
+| ripgrep | sudo apt install ripgrep |
+| fg | sudo apt install fg-find |
+| monaspace Krypton | https://github.com/githubnext/monaspace |
+| kitty | https://sw.kovidgoyal.net/kitty/binary/ |
+| nvim | https://github.com/neovim/neovim/releases |
+| packer | https://github.com/wbthomason/packer.nvim |
+
+## nvim cheat sheet
+
+| keys | action |
 | ----- | ------- |
 | j | go left |
 | ; | go right |
@@ -29,8 +40,3 @@
 | da( | delete around '(' ')' |
 | :%s/a/b/g | regex like, replace all occurences of 'a' to 'b' |
 
-## Gnome setting
-```bash
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
-```
