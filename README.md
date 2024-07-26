@@ -5,7 +5,7 @@
 | name | install |
 | ---- | ------- |
 | ripgrep | sudo apt install ripgrep |
-| fg | sudo apt install fg-find |
+| fg | sudo apt install fd-find |
 | monaspace Krypton | https://github.com/githubnext/monaspace |
 | kitty | https://sw.kovidgoyal.net/kitty/binary/ |
 | nvim | https://github.com/neovim/neovim/releases |
