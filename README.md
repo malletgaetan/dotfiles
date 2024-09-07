@@ -40,3 +40,10 @@
 | da( | delete around '(' ')' |
 | :%s/a/b/g | regex like, replace all occurences of 'a' to 'b' |
 
+## gnome settings
+
+```bash
+gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
+```
