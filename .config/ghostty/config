@@ -1,0 +1,25 @@
+# WINDOWS
+keybind = ctrl+w=close_surface
+keybind = ctrl+enter=new_split:auto
+keybind = ctrl+j=goto_split:left
+keybind = ctrl+semicolon=goto_split:right
+keybind = ctrl+l=goto_split:up
+keybind = ctrl+k=goto_split:down
+keybind = ctrl+f=toggle_fullscreen
+
+# TABS
+keybind = ctrl+shift+enter=new_tab
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+
+# DISABLE LIGATURES
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+# CURSOR
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+background = #171710

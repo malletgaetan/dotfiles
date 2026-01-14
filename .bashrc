@@ -1,41 +1,43 @@
-# If not running interactively, don't do anything
+# IF NOT RUNNING INTERACTIVELY, DO NOTHING
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# MORE HISTORY
 HISTSIZE=100000
 HISTFILESIZE=200000
-
-shopt -s checkwinsize
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
+HISTCONTROL=ignoreboth
 
 # CUSTOM ALIAS
 alias grep="grep --color=auto"
 alias ls="ls --color=auto -lah"
 alias code="flatpak run com.visualstudio.code"
 
+
+# GLOBAL DEFINITIONS
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# USER SPECIFIC ENVIRONMENTS
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+PS1='\u:\w\$ '
+
+# CUSTOM ALIAS
+alias vim=nvim
+alias ls="ls -lah"
+alias ps="ps -ef --forest"
+
+
 # NVIM COPY PASTE
 set clipboard+=unnamedplus
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# INSTALLS SPECIFICS
