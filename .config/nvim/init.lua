@@ -27,7 +27,6 @@ require("lazy").setup({
 
 -- BASIC SETTINGS
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
@@ -36,12 +35,15 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 5
+vim.opt.scroll = 5
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
+
+vim.opt.clipboard = "unnamedplus"
 
 -- COLORSCHEME
 vim.cmd("colorscheme default")
@@ -90,10 +92,8 @@ vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>")
 
 -- FUZZY FINDER
-vim.keymap.set("n", "<leader>f", "<cmd>FzfLua files<cr>")      -- find files
-vim.keymap.set("n", "<leader>g", "<cmd>FzfLua live_grep<cr>")  -- grep in project
-vim.keymap.set("n", "<leader>b", "<cmd>FzfLua buffers<cr>")    -- open buffers
-vim.keymap.set("n", "<leader>/", "<cmd>FzfLua grep_curbuf<cr>")-- search current file
+vim.keymap.set("n", "<C-p>", "<cmd>FzfLua files<cr>")      -- find files
+vim.keymap.set("n", "<C-S-f>", "<cmd>FzfLua live_grep<cr>")  -- grep in project
 
 -- DISABLE ACCIDENTAL KEYS
 local nop = '<Nop>'
@@ -113,3 +113,4 @@ vim.api.nvim_set_keymap('n', '<C-b>', nop, opts)
 vim.api.nvim_set_keymap('n', '<F1>', nop, opts)
 vim.api.nvim_set_keymap('i', '<F1>', nop, opts)
 vim.api.nvim_set_keymap('', 'h', nop, opts)
+
