@@ -1,16 +1,12 @@
-# Minimal ghostty + neovim/zed configuration
+# dotfiles
 
-## Dependencies
-- nvim
-- fzf
-- ripgrep
-- ghostty
+NixOS + Home Manager config
 
-## Gnome specifics
+## help
 
-```bash
-gsettings set org.gnome.desktop.wm.keybindings switch-applications "[]"
-gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
-gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
-```
-
+| where | what |
+| ---- | ----- |
+| https://search.nixos.org/packages | search for packages |
+| https://search.nixos.org/options | search for packages options |
+| https://nix-community.github.io/home-manager/ | home manager specifics |
+| https://wiki.nixos.org/ | wiki |
