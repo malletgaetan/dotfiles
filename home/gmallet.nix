@@ -3,6 +3,7 @@
 	imports = [
 		./programs/nvim.nix
 		./programs/ghostty.nix
+		./programs/kitty.nix
 		./programs/fzf.nix
 		./programs/git.nix
 		./programs/bash.nix
@@ -14,6 +15,7 @@
 	home.stateVersion = "25.11";
 
 	programs.home-manager.enable = true;
+	programs.kitty.enable = true;
 
 	home.file.".local/share/backgrounds/black-wallpaper.svg".source = ./assets/black-wallpaper.svg;
 
