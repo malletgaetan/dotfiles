@@ -1,28 +1,33 @@
-{ ... }:
+{ pkgs-unstable, ... }:
 {
+
 	programs.kitty = {
+		package = pkgs-unstable.kitty;
 		enable = true;
 
 		settings = {
+			editor = "vim";
 			font_family = "Monaspace Argon";
 			bold_font = "auto";
 			italic_font = "auto";
 			bold_italic_font = "auto";
 			disable_ligature = "always";
 			scrollback_lines = "10000";
+			scrollback_pager = "nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -";
+			tab_bar_style = "powerline";
+			tab_powerline_style = "slanted";
 		};
 
 		keybindings = {
 			"ctrl+w" = "close_window";
-			"ctrl+enter" = "new_window";
+			"ctrl+enter" = "new_window_with_cwd";
 			"ctrl+j" = "neighboring_window left";
 			"ctrl+;" = "neighboring_window right";
 			"ctrl+l" = "neighboring_window up";
 			"ctrl+k" = "neighboring_window down";
-			"ctrl+shift+enter" = "new_tab";
+			"ctrl+shift+enter" = "new_tab_with_cwd";
 			"ctrl+tab" = "next_tab";
 			"ctrl+shift+tab" = "previous_tab";
-			"ctrl+f" = "search_scrollback";
 			"ctrl+shift+f" = ""; # unbind
 		};
 

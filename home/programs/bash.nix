@@ -33,6 +33,7 @@
 
 		shellAliases = {
 				open = "xdg-open";
+				# rg = "rg --hyperlink-format=kitty"; # this needs to be fixed is kitty config to default to nvim
 		};
 	};
 }

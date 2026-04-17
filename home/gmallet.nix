@@ -1,7 +1,7 @@
 { config, pkgs, pkgs-unstable, ... }:
 {
 	imports = [
-		./programs/nvim.nix
+		./programs/neovim.nix
 		./programs/ghostty.nix
 		./programs/kitty.nix
 		./programs/fzf.nix
@@ -20,6 +20,7 @@
 	home.file.".local/share/backgrounds/black-wallpaper.svg".source = ./assets/black-wallpaper.svg;
 
 	home.packages = with pkgs; [
+		fzf
 		git
 		wget
 		curl
@@ -63,6 +64,10 @@
 		};
 		"org/gnome/desktop/screensaver" = {
 			picture-uri = "file://${config.home.homeDirectory}/.local/share/backgrounds/black-wallpaper.svg";
+		};
+		"org/gnome/desktop/peripherals/mouse" = {
+			accel-profile = "flat";
+			natural-scroll = true;
 		};
 		"org/gnome/shell" = {
 			favorite-apps = [
