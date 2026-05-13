@@ -7,11 +7,11 @@
 
 		settings = {
 			editor = "vim";
-			font_family = "Monaspace Argon";
+			font_family = "family='Monaspace Argon' features='-calt -liga -dlig'";
 			bold_font = "auto";
 			italic_font = "auto";
 			bold_italic_font = "auto";
-			disable_ligature = "always";
+			disable_ligatures = "always";
 			scrollback_lines = "10000";
 			scrollback_pager = "nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -";
 			tab_bar_style = "powerline";

@@ -38,6 +38,13 @@
 				DefaultDownloadDirectory      = "${config.home.homeDirectory}/Downloads";
 
 				# Extensions
+				# To install an extension:
+				# - get the extension URL, example: https://addons.mozilla.org/en-US/firefox/addon/proton-vpn-firefox-extension/
+				# now we now slug=proton-vpn-firefox-extension, we need the extension id
+				# - wget https://addons.mozilla.org/firefox/downloads/latest/proton-vpn-firefox-extension/latest.xpi
+				# - unzip latest.xpi manifest.json
+				# - cat manifest.json | jq '.browser_specific_settings.gecko.id'
+				# now we have the id, use it as the attribute set key for the plugin, for example here its 'vpn@proton.ch'
 				ExtensionSettings = let
 					moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
 				in {
@@ -51,6 +58,12 @@
 
 					"78272b6fa58f4a1abaac99321d503a20@proton.me" = {
 						install_url       = moz "proton-pass";
+						installation_mode = "force_installed";
+						updates_disabled  = true;
+					};
+
+					"vpn@proton.ch" = {
+						install_url       = moz "proton-vpn-firefox-extension";
 						installation_mode = "force_installed";
 						updates_disabled  = true;
 					};
