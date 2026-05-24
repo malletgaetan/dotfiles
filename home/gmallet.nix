@@ -8,6 +8,7 @@
 		./programs/git.nix
 		./programs/bash.nix
 		./programs/firefox.nix
+		./programs/chrome.nix
 	];
 
 	home.username = "gmallet";
@@ -40,6 +41,7 @@
 		pkgs-unstable.go
 		pkgs-unstable.discord
 		pkgs-unstable.codex
+		pkgs-unstable.gemini-cli
 		pkgs-unstable.opencode
 		pkgs-unstable.llama-cpp-vulkan
 		pkgs-unstable.amdgpu_top
