@@ -13,7 +13,7 @@
 
 	home.username = "gmallet";
 	home.homeDirectory = "/home/gmallet";
-	home.stateVersion = "25.11";
+	home.stateVersion = "26.05";
 
 	programs.home-manager.enable = true;
 	programs.kitty.enable = true;
@@ -33,8 +33,9 @@
 		ripgrep
 		fd
 		wl-clipboard
-		cloc
+		tokei
 		monaspace
+		docker
 		pkgs-unstable.gcc
 		pkgs-unstable.cargo
 		pkgs-unstable.rustc
@@ -80,7 +81,7 @@
 		};
 		"org/gnome/shell" = {
 			favorite-apps = [
-				"firefox.desktop"
+				"chromium-browser.desktop"
 				"kitty.desktop"
 				"org.gnome.Nautilus.desktop"
 			];
@@ -104,9 +105,9 @@
 
 	home.pointerCursor = {
 		package = pkgs.xcursor-pro;
-		name = "XCursor-Pro-Dark";
-		size = 30;
-		gtk.enable = true;
+	 	name = "XCursor-Pro-Dark";
+	 	size = 30;
+	 	gtk.enable = true;
 		x11.enable = true;
 	};
 
@@ -114,13 +115,13 @@
 		enable = true;
 
 		defaultApplications = {
-			"text/html" = "firefox.desktop";
-			"text/xml" = "firefox.desktop";
-			"application/xhtml+xml" = "firefox.desktop";
-			"application/xml" = "firefox.desktop";
+			"text/html" = "chromium-browser.desktop";
+			"text/xml" = "chromium-browser.desktop";
+			"application/xhtml+xml" = "chromium-browser.desktop";
+			"application/xml" = "chromium-browser.desktop";
 
-			"x-scheme-handler/http" = "firefox.desktop";
-			"x-scheme-handler/https" = "firefox.desktop";
+			"x-scheme-handler/http" = "chromium-browser.desktop";
+			"x-scheme-handler/https" = "chromium-browser.desktop";
 		};
 	};
 }

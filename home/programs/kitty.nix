@@ -16,6 +16,8 @@
 			scrollback_pager = "nvim --cmd 'set eventignore=FileType' +'nnoremap q ZQ' +'call nvim_open_term(0, {})' +'set nomodified nolist' +'$' -";
 			tab_bar_style = "powerline";
 			tab_powerline_style = "slanted";
+			enabled_layouts = "tall:bias=50;full_size=1;mirrored=false";
+			placement_strategy = "top-left";
 		};
 
 		keybindings = {

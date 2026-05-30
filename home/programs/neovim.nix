@@ -18,7 +18,7 @@
 			fzf-lua
 		];
 
-		extraLuaConfig = ''
+		initLua = ''
 			-- BASIC SETTINGS
 			vim.opt.number = true
 			vim.opt.cursorline = true
