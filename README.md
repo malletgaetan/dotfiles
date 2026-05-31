@@ -10,3 +10,4 @@ NixOS + Home Manager config
 | https://search.nixos.org/options | search for packages options |
 | https://nix-community.github.io/home-manager/ | home manager specifics |
 | https://wiki.nixos.org/ | wiki |
+| https://wiki.nixos.org/wiki/Flakes#Flake_schema | flake schema |
