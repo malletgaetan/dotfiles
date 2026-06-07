@@ -1,4 +1,9 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
+let
+	# xwayland-native-scaling can make XWayland apps crisp on HiDPI, but it
+	# may also cause tiny cursor/UI scaling bugs. Keep it off by default.
+	enableXWaylandNativeScaling = false;
+in
 {
 	imports = [
 		./programs/neovim.nix
@@ -18,6 +23,11 @@
 	programs.home-manager.enable = true;
 	programs.kitty.enable = true;
 
+	home.sessionVariables = {
+		# Nudge Chromium/Electron apps toward native Wayland to reduce XWayland scaling issues.
+		NIXOS_OZONE_WL = "1";
+	};
+
 	home.file.".local/share/backgrounds/black-wallpaper.svg".source = ./assets/black-wallpaper.svg;
 
 	home.packages = with pkgs; [
@@ -36,11 +46,15 @@
 		tokei
 		monaspace
 		docker
+		android-tools
+		killall
+		discord
+		obs-studio
+		lldb
 		pkgs-unstable.gcc
 		pkgs-unstable.cargo
 		pkgs-unstable.rustc
 		pkgs-unstable.go
-		pkgs-unstable.discord
 		pkgs-unstable.codex
 		pkgs-unstable.gemini-cli
 		pkgs-unstable.opencode
@@ -58,8 +72,6 @@
 		};
 		"org/gnome/desktop/interface" = {
 			color-scheme = "prefer-dark";
-			cursor-theme = "XCursor-Pro-Dark";
-			cursor-size = 30;
 			enable-animations = false;
 		};
 		"org/gnome/desktop/background" = {
@@ -87,11 +99,14 @@
 			];
 		};
 		"org/gnome/mutter" = {
-			experimental-features = [
-				"scale-monitor-framebuffer" # Enables fractional scaling (125% 150% 175%)
-				"xwayland-native-scaling" # Scales Xwayland applications to look crisp on HiDPI screens
-				"autoclose-xwayland" # automatically terminates Xwayland if all relevant X11 clients are gone
-			];
+			experimental-features =
+				[
+					"scale-monitor-framebuffer" # Enables GNOME fractional scaling (125%, 150%, 175%).
+					"autoclose-xwayland" # Automatically terminates XWayland if all relevant X11 clients are gone.
+				]
+				++ lib.optionals enableXWaylandNativeScaling [
+					"xwayland-native-scaling"
+				];
 		};
 	};
 
@@ -101,14 +116,6 @@
 			package = pkgs.adwaita-icon-theme;
 			name = "Adwaita";
 		};
-	};
-
-	home.pointerCursor = {
-		package = pkgs.xcursor-pro;
-	 	name = "XCursor-Pro-Dark";
-	 	size = 30;
-	 	gtk.enable = true;
-		x11.enable = true;
 	};
 
 	xdg.mimeApps = {

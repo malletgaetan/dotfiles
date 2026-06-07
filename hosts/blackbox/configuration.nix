@@ -4,6 +4,7 @@
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+
 	# https://wiki.nixos.org/wiki/Dual_Booting_NixOS_and_Windows
 	boot.loader = {
 	efi.canTouchEfiVariables = true;
@@ -74,7 +75,7 @@
 	users.users.gmallet = {
 		isNormalUser = true;
 		description = "gmallet";
-		extraGroups = [ "networkmanager" "wheel" ];
+		extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" ];
 	};
 
 	nixpkgs.config.allowUnfree = true;

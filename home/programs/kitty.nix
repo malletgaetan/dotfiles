@@ -33,6 +33,6 @@
 			"ctrl+shift+f" = ""; # unbind
 		};
 
-		themeFile = "base2tone-desert-dark";
+		themeFile = "everforest_dark_hard";
 	};
 }
