@@ -1,8 +1,8 @@
-{ pkgs-unstable, ... }:
+{ pkgs, ... }:
 {
 
 	programs.kitty = {
-		package = pkgs-unstable.kitty;
+		package = pkgs.kitty;
 		enable = true;
 
 		settings = {

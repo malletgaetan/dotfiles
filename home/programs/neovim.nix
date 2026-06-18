@@ -16,6 +16,13 @@
 
 		plugins = with pkgs.vimPlugins; [
 			fzf-lua
+			nvim-lspconfig
+			nvim-cmp
+			cmp-nvim-lsp
+			cmp-buffer
+			cmp-path
+			luasnip
+			cmp_luasnip
 		];
 
 		initLua = ''
@@ -37,6 +44,9 @@
 
 			vim.opt.termguicolors = true
 			vim.opt.clipboard = "unnamedplus"
+			vim.opt.swapfile = false
+
+			vim.g.mapleader = " "
 
 			-- COLORSCHEME
 			vim.cmd("colorscheme default")
@@ -69,9 +79,73 @@
 				},
 			})
 
-			-- KEYBINDINGS
-			vim.g.mapleader = " "
+			-- COMPLETION
+			local cmp = require("cmp")
+			local luasnip = require("luasnip")
 
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
+				mapping = cmp.mapping.preset.insert({
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+				}),
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
+				}, {
+					{ name = "buffer" },
+				}),
+			})
+
+			-- LSP
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			vim.diagnostic.config({
+				virtual_text = false,
+				virtual_lines = false,
+				signs = false,
+				underline = false,
+				update_in_insert = false,
+			})
+
+			local on_lsp_attach = function(_, bufnr)
+				local map = function(mode, lhs, rhs)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+				end
+
+				map("n", "gd", vim.lsp.buf.definition)
+				map("n", "gD", vim.lsp.buf.declaration)
+				map("n", "gi", vim.lsp.buf.implementation)
+				map("n", "gr", vim.lsp.buf.references)
+				map("n", "h", vim.lsp.buf.hover)
+			end
+
+			local servers = {
+				{ name = "zls", command = "zls" },
+				{ name = "rust_analyzer", command = "rust-analyzer" },
+				{ name = "gopls", command = "gopls" },
+				{ name = "clangd", command = "clangd" },
+			}
+
+			for _, server in ipairs(servers) do
+				if vim.fn.executable(server.command) == 1 then
+					vim.lsp.config(server.name, {
+						capabilities = capabilities,
+						on_attach = on_lsp_attach,
+					})
+					vim.lsp.enable(server.name)
+				end
+			end
+
+			-- KEYBINDINGS
 			-- Indent without losing selection
 			vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true })
 			vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true })
