@@ -1,13 +1,7 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
-let
-	# xwayland-native-scaling can make XWayland apps crisp on HiDPI, but it
-	# may also cause tiny cursor/UI scaling bugs. Keep it off by default.
-	enableXWaylandNativeScaling = false;
-in
+{ config, pkgs, pkgs-unstable, ... }:
 {
 	imports = [
 		./programs/neovim.nix
-		./programs/ghostty.nix
 		./programs/kitty.nix
 		./programs/fzf.nix
 		./programs/git.nix
@@ -24,8 +18,15 @@ in
 	programs.kitty.enable = true;
 
 	home.sessionVariables = {
-		# Nudge Chromium/Electron apps toward native Wayland to reduce XWayland scaling issues.
+		# Nixpkgs' Discord wrapper only enables native Wayland when this is set.
 		NIXOS_OZONE_WL = "1";
+	};
+
+	home.pointerCursor = {
+		package = pkgs.adwaita-icon-theme;
+		name = "Adwaita";
+		size = 24;
+		gtk.enable = true;
 	};
 
 	home.file.".local/share/backgrounds/black-wallpaper.svg".source = ./assets/black-wallpaper.svg;
@@ -50,7 +51,8 @@ in
 		killall
 		discord
 		obs-studio
-		lldb
+		gdb
+		gnumake
 		pkgs-unstable.gcc
 		pkgs-unstable.cargo
 		pkgs-unstable.rustc
@@ -73,6 +75,8 @@ in
 		"org/gnome/desktop/interface" = {
 			color-scheme = "prefer-dark";
 			enable-animations = false;
+			cursor-theme = "Adwaita";
+			cursor-size = 24;
 		};
 		"org/gnome/desktop/background" = {
 			picture-uri = "file://${config.home.homeDirectory}/.local/share/backgrounds/black-wallpaper.svg";
@@ -99,24 +103,13 @@ in
 			];
 		};
 		"org/gnome/mutter" = {
-			experimental-features =
-				[
-					"scale-monitor-framebuffer" # Enables GNOME fractional scaling (125%, 150%, 175%).
-					"autoclose-xwayland" # Automatically terminates XWayland if all relevant X11 clients are gone.
-				]
-				++ lib.optionals enableXWaylandNativeScaling [
-					"xwayland-native-scaling"
-				];
+			experimental-features = [
+				"scale-monitor-framebuffer" # Enables GNOME fractional scaling (125%, 150%, 175%).
+			];
 		};
 	};
 
-	gtk = {
-		enable = true;
-		iconTheme = {
-			package = pkgs.adwaita-icon-theme;
-			name = "Adwaita";
-		};
-	};
+	gtk.enable = true;
 
 	xdg.mimeApps = {
 		enable = true;

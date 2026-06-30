@@ -47,7 +47,8 @@
 		LC_TIME = "fr_FR.UTF-8";
 	};
 
-	services.xserver.enable = true;
+	services.xserver.enable = false;
+	programs.xwayland.enable = false;
 	services.desktopManager.gnome.enable = true;
 	services.displayManager.gdm.enable = true;
 
@@ -57,6 +58,8 @@
 	services.gnome.core-developer-tools.enable = false;
 	services.gnome.games.enable = false;
 	environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
+
+	documentation.dev.enable = true;
 
 	services.xserver.xkb = {
 		layout = "us";
