@@ -15,8 +15,6 @@
 
 		initExtra = ''
 			export HISTFILE="$HOME/.bash_history"
-			export HISTSIZE=100000
-			export HISTFILESIZE=200000
 			export HISTTIMEFORMAT="%F %T "
 
 			__hm_history_sync() {
@@ -33,6 +31,7 @@
 
 		shellAliases = {
 				open = "xdg-open";
+				ls = "ls -lah";
 				# rg = "rg --hyperlink-format=kitty"; # this needs to be fixed is kitty config to default to nvim
 		};
 	};

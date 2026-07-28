@@ -1,12 +1,11 @@
-{ pkgs, ... }:
+{ ... }:
 {
 
 	programs.kitty = {
-		package = pkgs.kitty;
 		enable = true;
 
 		settings = {
-			editor = "vim";
+			editor = "nvim";
 			font_family = "family='Monaspace Argon' features='-calt -liga -dlig'";
 			bold_font = "auto";
 			italic_font = "auto";
@@ -18,6 +17,7 @@
 			tab_powerline_style = "slanted";
 			enabled_layouts = "tall:bias=50;full_size=1;mirrored=false";
 			placement_strategy = "top-left";
+			tab_title_template = "{f'{title[:20]:^20}'}";
 		};
 
 		keybindings = {
@@ -27,7 +27,7 @@
 			"ctrl+;" = "neighboring_window right";
 			"ctrl+l" = "neighboring_window up";
 			"ctrl+k" = "neighboring_window down";
-			"ctrl+shift+enter" = "new_tab_with_cwd";
+			"ctrl+shift+enter" = "new_tab_with_cwd !neighbor";
 			"ctrl+tab" = "next_tab";
 			"ctrl+shift+tab" = "previous_tab";
 			"ctrl+shift+f" = ""; # unbind

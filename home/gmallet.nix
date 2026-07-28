@@ -15,7 +15,6 @@
 	home.stateVersion = "26.05";
 
 	programs.home-manager.enable = true;
-	programs.kitty.enable = true;
 
 	home.sessionVariables = {
 		# Nixpkgs' Discord wrapper only enables native Wayland when this is set.
@@ -32,8 +31,6 @@
 	home.file.".local/share/backgrounds/black-wallpaper.svg".source = ./assets/black-wallpaper.svg;
 
 	home.packages = with pkgs; [
-		fzf
-		git
 		wget
 		curl
 		zip
@@ -46,22 +43,22 @@
 		wl-clipboard
 		tokei
 		monaspace
-		docker
 		android-tools
-		killall
 		discord
 		obs-studio
 		gdb
 		gnumake
-		pkgs-unstable.gcc
-		pkgs-unstable.cargo
-		pkgs-unstable.rustc
-		pkgs-unstable.go
-		pkgs-unstable.codex
-		pkgs-unstable.gemini-cli
-		pkgs-unstable.opencode
-		pkgs-unstable.llama-cpp-vulkan
-		pkgs-unstable.amdgpu_top
+		tcpdump
+		net-tools
+		traceroute
+		file
+		gcc
+		cargo
+		rustc
+		go
+		pkgs-unstable.claude-code
+		llama-cpp-vulkan
+		amdgpu_top
 	];
 
 	# 'gsettings': 'man gsettings', 'gsettings list-schemas', 'gsettings list-recursively', 'gsettings list-keys <schema>' to discover valid schemas and keys

@@ -20,14 +20,14 @@
 				config.allowUnfree = true;
 			};
 		in {
-			nixosConfigurations.blackbox = nixpkgs.lib.nixosSystem {
+			nixosConfigurations.boiboite = nixpkgs.lib.nixosSystem {
 				inherit system;
 				specialArgs = {
 					inherit pkgs-unstable;
 				};
 
 				modules = [
-					./hosts/blackbox/configuration.nix
+					./hosts/boiboite/configuration.nix
 					home-manager.nixosModules.home-manager
 					{
 						home-manager.useGlobalPkgs = true;

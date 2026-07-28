@@ -4,6 +4,11 @@
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+	virtualisation.docker.enable = true;
+	virtualisation.docker.rootless = {
+		enable = true;
+		setSocketVariable = true;
+	};
 
 	# https://wiki.nixos.org/wiki/Dual_Booting_NixOS_and_Windows
 	boot.loader = {
@@ -31,7 +36,7 @@
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 
 	networking.networkmanager.enable = true;
-	networking.hostName = "blackbox";
+	networking.hostName = "boiboite";
 
 	time.timeZone = "Europe/Paris";
 	i18n.defaultLocale = "en_US.UTF-8";
@@ -78,7 +83,7 @@
 	users.users.gmallet = {
 		isNormalUser = true;
 		description = "gmallet";
-		extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" ];
+		extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm" "docker" ];
 	};
 
 	nixpkgs.config.allowUnfree = true;
