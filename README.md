@@ -6,15 +6,11 @@
 # Rebuild system + home and switch to it (run from this directory)
 sudo nixos-rebuild switch --flake .#boiboite
 
-# Build & pick at next boot instead of switching now
-sudo nixos-rebuild boot --flake .#boiboite
-
 # Dry-run: build without activating
 sudo nixos-rebuild build --flake .#boiboite
 
-# Update all pinned inputs (writes flake.lock), then rebuild
+# Update all pinned inputs
 nix flake update
-sudo nixos-rebuild switch --flake .#boiboite
 
 # Update just one input
 nix flake update nixpkgs-unstable

@@ -1,38 +1,41 @@
 { ... }:
 {
-	programs.bash = {
-		enable = true;
+  programs.bash = {
+    enable = true;
 
-		historySize = 100000;
-		historyFileSize = 200000;
-		historyControl = [ "ignoredups" "ignorespace" ];
-		historyIgnore = [
-			"ls"
-			"cd"
-			"pwd"
-			"exit"
-		];
+    historySize = 100000;
+    historyFileSize = 200000;
+    historyControl = [
+      "ignoredups"
+      "ignorespace"
+    ];
+    historyIgnore = [
+      "ls"
+      "cd"
+      "pwd"
+      "exit"
+    ];
 
-		initExtra = ''
-			export HISTFILE="$HOME/.bash_history"
-			export HISTTIMEFORMAT="%F %T "
+    initExtra = ''
+      			export HISTFILE="$HOME/.bash_history"
+      			export HISTTIMEFORMAT="%F %T "
 
-			__hm_history_sync() {
-				history -a
-				history -n
-			}
+      			__hm_history_sync() {
+      				history -a
+      				history -n
+      			}
 
-			if [[ -n "''${PROMPT_COMMAND:-}" ]]; then
-				PROMPT_COMMAND="__hm_history_sync; $PROMPT_COMMAND"
-			else
-				PROMPT_COMMAND="__hm_history_sync"
-			fi
-		'';
+      			if [[ -n "''${PROMPT_COMMAND:-}" ]]; then
+      				PROMPT_COMMAND="__hm_history_sync; $PROMPT_COMMAND"
+      			else
+      				PROMPT_COMMAND="__hm_history_sync"
+      			fi
+      		'';
 
-		shellAliases = {
-				open = "xdg-open";
-				ls = "ls -lah";
-				# rg = "rg --hyperlink-format=kitty"; # this needs to be fixed is kitty config to default to nvim
-		};
-	};
+    shellAliases = {
+      open = "xdg-open";
+      ls = "ls -lah";
+      # rg = "rg --hyperlink-format=kitty"; # this needs to be fixed is kitty config to default to nvim
+    };
+  };
 }

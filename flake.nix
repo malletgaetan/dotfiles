@@ -1,45 +1,55 @@
 {
-	description = "NixOS yay !";
+  description = "NixOS yay !";
 
-	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-		home-manager = {
-			url = "github:nix-community/home-manager/release-26.05";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-	};
+    home-manager = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-	outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
-		let
-			system = "x86_64-linux";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
 
-			pkgs-unstable = import nixpkgs-unstable {
-				inherit system;
-				config.allowUnfree = true;
-			};
-		in {
-			nixosConfigurations.boiboite = nixpkgs.lib.nixosSystem {
-				inherit system;
-				specialArgs = {
-					inherit pkgs-unstable;
-				};
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
 
-				modules = [
-					./hosts/boiboite/configuration.nix
-					home-manager.nixosModules.home-manager
-					{
-						home-manager.useGlobalPkgs = true;
-						home-manager.useUserPackages = true;
-						home-manager.backupFileExtension = "backup";
-						home-manager.extraSpecialArgs = {
-							inherit pkgs-unstable;
-						};
+      nixosConfigurations.boiboite = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit pkgs-unstable;
+        };
 
-						home-manager.users.gmallet = import ./home/gmallet.nix;
-					}
-				];
-			};
-		};
+        modules = [
+          ./hosts/boiboite/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.extraSpecialArgs = {
+              inherit pkgs-unstable;
+            };
+
+            home-manager.users.gmallet = import ./home/gmallet.nix;
+          }
+        ];
+      };
+    };
 }
